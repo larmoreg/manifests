@@ -1,0 +1,15 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: mlflow
+spec:
+  jwtRules:
+  - audiences:
+    - mlflow.kubeflow.org
+    issuer: https://oidc.eks.us-east-1.amazonaws.com/id/9D8E26090EB03743E82B3C8D91DD88EC
+  - audiences:
+    - mlflow.kubeflow.org
+    issuer: https://oidc.eks.us-east-1.amazonaws.com/id/A20D307D2235B928710867FE7F168DFD
+  selector:
+    matchLabels:
+      app: mlflow

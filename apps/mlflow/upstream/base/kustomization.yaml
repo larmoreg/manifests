@@ -1,0 +1,51 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kubeflow
+resources:
+- deployment.yaml
+- service.yaml
+- service-account.yaml
+commonLabels:
+  kustomize.component: mlflow
+  app: mlflow
+  app.kubernetes.io/component: mlflow
+  app.kubernetes.io/name: mlflow
+images:
+- name: docker.io/larmoreg/mlflow
+  newName: docker.io/larmoreg/mlflow
+  newTag: 2.5.1.dev0
+configMapGenerator:
+- envs:
+  - params.env
+  name: mlflow-parameters
+generatorOptions:
+  disableNameSuffixHash: true
+vars:
+- fieldref:
+    fieldPath: metadata.namespace
+  name: MF_NAMESPACE
+  objref:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mlflow
+- fieldref:
+    fieldPath: data.MF_CLUSTER_DOMAIN
+  name: MF_CLUSTER_DOMAIN
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: mlflow-parameters
+- fieldref:
+    fieldPath: data.MF_NAMESPACE_HEADER
+  name: MF_NAMESPACE_HEADER
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: mlflow-parameters
+- fieldref:
+    fieldPath: data.MF_USERID_HEADER
+  name: MF_USERID_HEADER
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: mlflow-parameters

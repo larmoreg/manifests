@@ -76,6 +76,8 @@ resources:
 - ../apps/pvcviewer-controller/upstream/base
 # Volumes Web App
 - ../apps/volumes-web-app/upstream/overlays/istio
+# MLflow
+- ../apps/mlflow/upstream/overlays/istio
 # Tensorboards Controller
 - ../apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow
 # Tensorboard Web App

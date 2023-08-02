@@ -14,6 +14,12 @@ data:
                 "type": "item"
             },
             {
+                "icon": "autorenew",
+                "link": "/mlflow/",
+                "text": "MLflow",
+                "type": "item"
+            },
+            {
                 "icon": "assessment",
                 "link": "/tensorboards/",
                 "text": "TensorBoards",
